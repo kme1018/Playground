@@ -1,6 +1,10 @@
 package leetcode;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
@@ -249,5 +253,36 @@ public class Solution {
 	        return stack.isEmpty() ? "YES" : "NO";
 	    }
 	
-	
+	 public static class MyQueue<T> {
+	        Stack<T> stackNewestOnTop = new Stack<T>();
+	        Stack<T> stackOldestOnTop = new Stack<T>();
+
+	        public void enqueue(T value) { // Push onto newest stack
+	            stackNewestOnTop.push(value);
+	        }
+
+	        public T peek() {
+	        	if(stackOldestOnTop.isEmpty()){
+	        		while (!stackNewestOnTop.isEmpty()){
+	        			stackOldestOnTop.push(stackNewestOnTop.pop());
+	        		}
+	        	}
+	             return stackOldestOnTop.peek();
+	        }
+
+	        public T dequeue() {
+	        	if(stackOldestOnTop.isEmpty()){
+	        		while (!stackNewestOnTop.isEmpty()){
+	        			stackOldestOnTop.push(stackNewestOnTop.pop());
+	        		}
+	        	}
+	            return stackOldestOnTop.pop();
+	        }
+	    }
+	 
+	 public class Heap{
+		 private Queue<Integer> low = new PriorityQueue<Integer>(10, Collections.reverseOrder());
+		 private Queue<Integer> high = new PriorityQueue<Integer>();
+	 }
+	 
 }
